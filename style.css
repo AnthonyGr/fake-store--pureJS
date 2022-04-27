@@ -27,6 +27,7 @@
 .card {
   margin-top: 20px;
   padding: 15px;
+  height: 100%;
   border: 1px solid gray;
   width: 33.3333%;
   border-radius: 5px;
@@ -38,5 +39,9 @@
   margin: 0 auto;
   -o-object-fit: contain;
      object-fit: contain;
+}
+
+.card__body {
+  height: 100%;
 }
 /*# sourceMappingURL=style.css.map */
