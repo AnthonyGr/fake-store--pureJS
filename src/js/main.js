@@ -12,5 +12,5 @@ window.addEventListener("DOMContentLoaded", () => {
 
   //FLOW
   getAllGoods();
-  cards.createCards(goodsList);
+  // cards(goodsList);
 });

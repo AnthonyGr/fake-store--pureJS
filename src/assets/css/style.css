@@ -1,0 +1,47 @@
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.header {
+  padding: 0 10px;
+  background-color: cyan;
+}
+
+.header__logo {
+  font-size: 30px;
+  color: white;
+}
+
+.cards-list {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+.card {
+  margin-top: 20px;
+  padding: 15px;
+  height: 100%;
+  border: 1px solid gray;
+  width: 33.3333%;
+  border-radius: 5px;
+}
+
+.card__image {
+  height: 200px;
+  width: 250px;
+  margin: 0 auto;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+
+.card__body {
+  height: 100%;
+}
+/*# sourceMappingURL=style.css.map */
