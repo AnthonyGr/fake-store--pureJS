@@ -7,10 +7,11 @@ window.addEventListener("DOMContentLoaded", () => {
   const getAllGoods = async () => {
     const response = await fetch("https://fakestoreapi.com/products");
     goodsList = await response.json();
-    console.log(goodsList);
+
+    //Формируем карточки товара
+    cards(goodsList);
   };
 
   //FLOW
   getAllGoods();
-  // cards(goodsList);
 });

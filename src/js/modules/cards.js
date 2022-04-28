@@ -1,8 +1,30 @@
-const cards = (items) => {
-  // items.forEach((item) => {
-  //   console.log(item);
-  // });
-  console.log(items);
+const cards = (items, parent) => {
+  items.forEach((item) => {
+    const elem = document.createElement("article");
+    elem.classList.add("card");
+    elem.innerHTML = `
+    <div class="card__header">
+      <figure class="card__figure">
+        <img
+          src=${item.image}
+          alt=""
+          class="card__image"
+        />
+      </figure>
+    </div>
+    <div class="card__body">
+      <h2 class="card__title">${item.title}</h2>
+      <h3 class="card__subtitle">Card Subtitle</h3>
+      <p class="card__copy">${item.description}</p>
+    </div>
+    <footer class="card__footer">
+      <div class="card__actions">
+        <button class="button">${item.price} $</button>
+      </div>
+    </footer>
+    `;
+    document.querySelector(".cards-list").appendChild(elem);
+  });
 };
 
 export default cards;
