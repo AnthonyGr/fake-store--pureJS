@@ -106,6 +106,7 @@
   background-color: lightblue;
   padding: 2px;
   border-radius: 4px;
+  cursor: pointer;
 }
 
 .cart-image {
@@ -118,7 +119,7 @@
   position: absolute;
   top: 0;
   right: 2px;
-  color: white;
+  color: black;
 }
 
 @media (min-width: 769px) {

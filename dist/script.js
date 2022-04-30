@@ -5507,6 +5507,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_es_symbol_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol_js__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var core_js_modules_es_symbol_description_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! core-js/modules/es.symbol.description.js */ "./node_modules/core-js/modules/es.symbol.description.js");
 /* harmony import */ var core_js_modules_es_symbol_description_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol_description_js__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _shoppingCart__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./shoppingCart */ "./src/js/modules/shoppingCart.js");
+
 
 
 
@@ -5515,15 +5517,41 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var cards = function cards(items, parent) {
-  items.forEach(function (item) {
+  items.forEach(function (item, i) {
     var elem = document.createElement("article");
     elem.classList.add("card");
-    elem.innerHTML = "\n    <div class=\"card__header\">\n      <figure class=\"card__figure\">\n        <img\n          src=".concat(item.image, "\n          alt=\"\"\n          class=\"card__image\"\n        />\n      </figure>\n    </div>\n    <div class=\"card__body\">\n      <h2 class=\"card__title\">").concat(item.title, "</h2>\n      <h3 class=\"card__subtitle\">Card Subtitle</h3>\n      <p class=\"card__copy\">").concat(item.description, "</p>\n    </div>\n    <footer class=\"card__footer\">\n      <div class=\"card__actions\">\n        <button class=\"button\">").concat(item.price, " $</button>\n      </div>\n    </footer>\n    ");
+    elem.setAttribute("data-index", i);
+    elem.innerHTML = "\n    <div class=\"card__header\">\n      <figure class=\"card__figure\">\n        <img\n          src=".concat(item.image, "\n          alt=\"\"\n          class=\"card__image\"\n        />\n      </figure>\n    </div>\n    <div class=\"card__body\">\n      <h2 class=\"card__title\">").concat(item.title, "</h2>\n      <h3 class=\"card__subtitle\">Card Subtitle</h3>\n      <p class=\"card__copy\">").concat(item.description, "</p>\n    </div>\n    <footer class=\"card__footer\">\n      <div class=\"card__actions\">\n        <button class=\"btn-buy\">").concat(item.price, " $</button>\n      </div>\n    </footer>\n    ");
     document.querySelector(".cards-list").appendChild(elem);
+  });
+  document.querySelectorAll(".btn-buy").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      Object(_shoppingCart__WEBPACK_IMPORTED_MODULE_6__["default"])(".cart-count");
+    });
   });
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (cards);
+
+/***/ }),
+
+/***/ "./src/js/modules/shoppingCart.js":
+/*!****************************************!*\
+  !*** ./src/js/modules/shoppingCart.js ***!
+  \****************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+var count = 0;
+
+var incCartCount = function incCartCount(selector) {
+  var cartCount = document.querySelector(selector);
+  cartCount.textContent = ++count;
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (incCartCount);
 
 /***/ }),
 

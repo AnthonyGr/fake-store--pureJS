@@ -1,7 +1,10 @@
+import incCartCount from "./shoppingCart";
+
 const cards = (items, parent) => {
-  items.forEach((item) => {
+  items.forEach((item, i) => {
     const elem = document.createElement("article");
     elem.classList.add("card");
+    elem.setAttribute("data-index", i);
     elem.innerHTML = `
     <div class="card__header">
       <figure class="card__figure">
@@ -19,11 +22,17 @@ const cards = (items, parent) => {
     </div>
     <footer class="card__footer">
       <div class="card__actions">
-        <button class="button">${item.price} $</button>
+        <button class="btn-buy">${item.price} $</button>
       </div>
     </footer>
     `;
     document.querySelector(".cards-list").appendChild(elem);
+  });
+
+  document.querySelectorAll(".btn-buy").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      incCartCount(".cart-count");
+    });
   });
 };
 
