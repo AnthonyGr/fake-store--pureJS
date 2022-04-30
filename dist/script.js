@@ -5431,6 +5431,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_es_promise_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es.promise.js */ "./node_modules/core-js/modules/es.promise.js");
 /* harmony import */ var core_js_modules_es_promise_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_promise_js__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _modules_cards__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/cards */ "./src/js/modules/cards.js");
+/* harmony import */ var _modules_spinner__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/spinner */ "./src/js/modules/spinner.js");
 
 
 
@@ -5438,6 +5439,7 @@ __webpack_require__.r(__webpack_exports__);
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 
 
 window.addEventListener("DOMContentLoaded", function () {
@@ -5460,10 +5462,12 @@ window.addEventListener("DOMContentLoaded", function () {
 
             case 5:
               goodsList = _context.sent;
-              //Формируем карточки товара
+              //Выклчаем спинер
+              Object(_modules_spinner__WEBPACK_IMPORTED_MODULE_4__["default"])(".preloader"); //Формируем карточки товара
+
               Object(_modules_cards__WEBPACK_IMPORTED_MODULE_3__["default"])(goodsList);
 
-            case 7:
+            case 8:
             case "end":
               return _context.stop();
           }
@@ -5520,6 +5524,24 @@ var cards = function cards(items, parent) {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (cards);
+
+/***/ }),
+
+/***/ "./src/js/modules/spinner.js":
+/*!***********************************!*\
+  !*** ./src/js/modules/spinner.js ***!
+  \***********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+var spinner = function spinner(selector) {
+  var preloader = document.querySelector(selector);
+  preloader.classList.add("loaded");
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (spinner);
 
 /***/ })
 
