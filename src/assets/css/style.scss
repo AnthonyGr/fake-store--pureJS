@@ -97,3 +97,38 @@
 .loaded {
   display: none;
 }
+
+// CART
+.cart {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 2rem;
+  background-color: lightblue;
+  padding: 2px;
+  border-radius: 4px;
+}
+
+.cart-image {
+  width: 40px;
+  height: 40px;
+  position: relative;
+}
+
+.cart-count {
+  position: absolute;
+  top: 0;
+  right: 2px;
+  color: white;
+}
+
+@media (min-width: 769px) {
+  .cart {
+    top: 3.5rem;
+    bottom: unset;
+  }
+
+  .cart-image {
+    width: 50px;
+    height: 50px;
+  }
+}
