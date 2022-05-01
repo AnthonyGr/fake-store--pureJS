@@ -5501,12 +5501,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each.js */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
 /* harmony import */ var core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var core_js_modules_es_array_concat_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/es.array.concat.js */ "./node_modules/core-js/modules/es.array.concat.js");
-/* harmony import */ var core_js_modules_es_array_concat_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_concat_js__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var core_js_modules_es_symbol_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! core-js/modules/es.symbol.js */ "./node_modules/core-js/modules/es.symbol.js");
-/* harmony import */ var core_js_modules_es_symbol_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol_js__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var core_js_modules_es_symbol_description_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! core-js/modules/es.symbol.description.js */ "./node_modules/core-js/modules/es.symbol.description.js");
-/* harmony import */ var core_js_modules_es_symbol_description_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol_description_js__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var core_js_modules_es_symbol_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/es.symbol.js */ "./node_modules/core-js/modules/es.symbol.js");
+/* harmony import */ var core_js_modules_es_symbol_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol_js__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var core_js_modules_es_symbol_description_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! core-js/modules/es.symbol.description.js */ "./node_modules/core-js/modules/es.symbol.description.js");
+/* harmony import */ var core_js_modules_es_symbol_description_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol_description_js__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var core_js_modules_es_array_concat_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! core-js/modules/es.array.concat.js */ "./node_modules/core-js/modules/es.array.concat.js");
+/* harmony import */ var core_js_modules_es_array_concat_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_concat_js__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _shoppingCart__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./shoppingCart */ "./src/js/modules/shoppingCart.js");
 
 
@@ -5517,18 +5517,25 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var cards = function cards(items, parent) {
-  items.forEach(function (item, i) {
+  items.forEach(function (_ref, i) {
+    var image = _ref.image,
+        title = _ref.title,
+        description = _ref.description,
+        price = _ref.price;
     var elem = document.createElement("article");
     elem.classList.add("card");
     elem.setAttribute("data-index", i);
-    elem.innerHTML = "\n    <div class=\"card__header\">\n      <figure class=\"card__figure\">\n        <img\n          src=".concat(item.image, "\n          alt=\"\"\n          class=\"card__image\"\n        />\n      </figure>\n    </div>\n    <div class=\"card__body\">\n      <h2 class=\"card__title\">").concat(item.title, "</h2>\n      <h3 class=\"card__subtitle\">Card Subtitle</h3>\n      <p class=\"card__copy\">").concat(item.description, "</p>\n    </div>\n    <footer class=\"card__footer\">\n      <div class=\"card__actions\">\n        <button class=\"btn-buy\">").concat(item.price, " $</button>\n      </div>\n    </footer>\n    ");
-    document.querySelector(".cards-list").appendChild(elem);
-  });
-  document.querySelectorAll(".btn-buy").forEach(function (btn) {
-    btn.addEventListener("click", function () {
-      Object(_shoppingCart__WEBPACK_IMPORTED_MODULE_6__["default"])(".cart-count");
+    elem.innerHTML = "\n    <div class=\"card__header\">\n      <figure class=\"card__figure\">\n        <img\n          src=".concat(image, "\n          alt=\"\"\n          class=\"card__image\"\n        />\n      </figure>\n    </div>\n    <div class=\"card__body\">\n      <h2 class=\"card__title\">").concat(title, "</h2>\n      <h3 class=\"card__subtitle\">Card Subtitle</h3>\n      <p class=\"card__copy\">").concat(description, "</p>\n    </div>\n    <footer class=\"card__footer\">\n      <div class=\"card__actions\">\n        <button class=\"btn-buy\">").concat(price, " $</button>\n      </div>\n    </footer>\n    ");
+    console.log(elem);
+    elem.querySelector(".btn-buy").addEventListener("click", function () {
+      Object(_shoppingCart__WEBPACK_IMPORTED_MODULE_6__["default"])(i, title, price);
     });
-  });
+    document.querySelector(".cards-list").appendChild(elem);
+  }); // document.querySelectorAll(".btn-buy").forEach((btn) => {
+  //   btn.addEventListener("click", () => {
+  //     incCartCount(".cart-count");
+  //   });
+  // });
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (cards);
@@ -5544,14 +5551,49 @@ var cards = function cards(items, parent) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+var CART = {};
 var count = 0;
 
 var incCartCount = function incCartCount(selector) {
   var cartCount = document.querySelector(selector);
   cartCount.textContent = ++count;
+}; //ADD ITEM TO CART
+
+
+var addToCart = function addToCart(id, title, price) {
+  if (CART[id]) {
+    CART[id].count++;
+  } else {
+    CART[id] = {
+      name: title,
+      price: price,
+      count: 1
+    };
+  }
+
+  console.log(CART);
+}; //REMOVE ITEM FROM CART
+
+
+var removeFromCart = function removeFromCart(id) {
+  delete CART.id;
+}; //INC ITEM COUNT IN CART
+
+
+var incItemCount = function incItemCount(id) {
+  CART[id].count++;
+}; //DEC ITEM COUNT IN CART
+
+
+var decItemCount = function decItemCount(id) {
+  CART[id].count--;
+
+  if (CART[id].count === 0) {
+    removeFromCart(id);
+  }
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (incCartCount);
+/* harmony default export */ __webpack_exports__["default"] = (addToCart);
 
 /***/ }),
 

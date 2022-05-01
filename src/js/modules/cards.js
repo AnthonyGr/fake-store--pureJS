@@ -1,7 +1,7 @@
-import incCartCount from "./shoppingCart";
+import addToCart from "./shoppingCart";
 
 const cards = (items, parent) => {
-  items.forEach((item, i) => {
+  items.forEach(({ image, title, description, price }, i) => {
     const elem = document.createElement("article");
     elem.classList.add("card");
     elem.setAttribute("data-index", i);
@@ -9,31 +9,35 @@ const cards = (items, parent) => {
     <div class="card__header">
       <figure class="card__figure">
         <img
-          src=${item.image}
+          src=${image}
           alt=""
           class="card__image"
         />
       </figure>
     </div>
     <div class="card__body">
-      <h2 class="card__title">${item.title}</h2>
+      <h2 class="card__title">${title}</h2>
       <h3 class="card__subtitle">Card Subtitle</h3>
-      <p class="card__copy">${item.description}</p>
+      <p class="card__copy">${description}</p>
     </div>
     <footer class="card__footer">
       <div class="card__actions">
-        <button class="btn-buy">${item.price} $</button>
+        <button class="btn-buy">${price} $</button>
       </div>
     </footer>
     `;
+    console.log(elem);
+    elem.querySelector(".btn-buy").addEventListener("click", () => {
+      addToCart(i, title, price);
+    });
     document.querySelector(".cards-list").appendChild(elem);
   });
 
-  document.querySelectorAll(".btn-buy").forEach((btn) => {
-    btn.addEventListener("click", () => {
-      incCartCount(".cart-count");
-    });
-  });
+  // document.querySelectorAll(".btn-buy").forEach((btn) => {
+  //   btn.addEventListener("click", () => {
+  //     incCartCount(".cart-count");
+  //   });
+  // });
 };
 
 export default cards;
