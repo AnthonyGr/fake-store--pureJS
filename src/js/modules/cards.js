@@ -1,4 +1,4 @@
-import addToCart from "./shoppingCart";
+import { addToCart } from "./shoppingCart";
 
 const cards = (items, parent) => {
   items.forEach(({ image, title, description, price }, i) => {
@@ -26,18 +26,11 @@ const cards = (items, parent) => {
       </div>
     </footer>
     `;
-    console.log(elem);
     elem.querySelector(".btn-buy").addEventListener("click", () => {
       addToCart(i, title, price);
     });
     document.querySelector(".cards-list").appendChild(elem);
   });
-
-  // document.querySelectorAll(".btn-buy").forEach((btn) => {
-  //   btn.addEventListener("click", () => {
-  //     incCartCount(".cart-count");
-  //   });
-  // });
 };
 
 export default cards;
