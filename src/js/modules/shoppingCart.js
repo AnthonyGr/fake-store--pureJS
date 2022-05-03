@@ -4,7 +4,8 @@ let quantity = 0,
   cartModalOverlay = document.querySelector("#modal-overlay"),
   cart = document.querySelector(".cart"),
   cartCloseBtn = document.querySelector("#close-button"),
-  cartTotalCost = document.querySelector(".shopping-list__total");
+  cartTotalCost = document.querySelector(".shopping-list__total"),
+  cartQuantity = document.querySelector(".cart-quantity");
 
 cart.addEventListener("click", () => {
   toggleCart();
@@ -24,10 +25,15 @@ const toggleCart = () => {
   }
 };
 
-// const incCartCount = (selector) => {
-//   const cartCount = document.querySelector(selector);
-//   cartCount.textContent = ++quantity;
-// };
+const showGoodsQuantity = () => {
+  const quantity = Object.keys(CART).length;
+  console.log(quantity);
+  if (quantity === 0) {
+    cartQuantity.textContent = "";
+  } else {
+    cartQuantity.textContent = quantity;
+  }
+};
 
 const updateCart = () => {
   //CLEAR CART
@@ -69,17 +75,14 @@ const addToCart = (id, title, price) => {
   } else {
     CART[id] = { name: title, price: price, quantity: 1 };
   }
+
+  showGoodsQuantity();
 };
 
 //REMOVE ITEM FROM CART
 const removeFromCart = (id) => {
-  // CART = Object.keys(CART).reduce((object, key) => {
-  //   if (key !== id) {
-  //     object[key] = CART[key];
-  //   }
-  // });
   delete CART[id];
-  console.log(CART);
+  showGoodsQuantity();
 };
 
 //INC ITEM QUANTITY IN CART

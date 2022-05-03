@@ -115,7 +115,7 @@
   position: relative;
 }
 
-.cart-count {
+.cart-quantity {
   position: absolute;
   top: 0;
   right: 2px;
@@ -209,6 +209,7 @@
   border-radius: 4px;
 }
 
+//TODO: Стилизовать список товаров
 .shopping-list {
   // .shopping-list__header
   &__header {
