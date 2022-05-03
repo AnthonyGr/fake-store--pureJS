@@ -6712,7 +6712,7 @@ var cards = function cards(items, parent) {
     elem.setAttribute("data-index", i);
     elem.innerHTML = "\n    <div class=\"card__header\">\n      <figure class=\"card__figure\">\n        <img\n          src=".concat(image, "\n          alt=\"\"\n          class=\"card__image\"\n        />\n      </figure>\n    </div>\n    <div class=\"card__body\">\n      <h2 class=\"card__title\">").concat(title, "</h2>\n      <h3 class=\"card__subtitle\">Card Subtitle</h3>\n      <p class=\"card__copy\">").concat(description, "</p>\n    </div>\n    <footer class=\"card__footer\">\n      <div class=\"card__actions\">\n        <button class=\"btn-buy\">").concat(price, " $</button>\n      </div>\n    </footer>\n    ");
     elem.querySelector(".btn-buy").addEventListener("click", function () {
-      Object(_toast__WEBPACK_IMPORTED_MODULE_7__["default"])(title, 3000);
+      Object(_toast__WEBPACK_IMPORTED_MODULE_7__["default"])(title);
       Object(_shoppingCart__WEBPACK_IMPORTED_MODULE_6__["addToCart"])(i, title, price);
     });
     document.querySelector(".cards-list").appendChild(elem);
@@ -6933,16 +6933,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_web_timers_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/web.timers.js */ "./node_modules/core-js/modules/web.timers.js");
 /* harmony import */ var core_js_modules_web_timers_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_timers_js__WEBPACK_IMPORTED_MODULE_0__);
 
+var toast = document.querySelector("#toast");
+var timerId;
 
 var showToast = function showToast() {
-  var text = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "Add to cart";
+  var text = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "";
   var duration = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 2000;
-  var toast = document.querySelector("#toast"); //TODO: Обработка быстрых нажатий на разные товары
 
-  toast.textContent = text;
-  toast.classList.add("show");
-  setTimeout(function () {
-    toast.classList.remove("show");
+  if (toast.style.display === "block") {
+    toast.style.display = "none";
+    clearTimeout(timerId);
+  }
+
+  toast.textContent = text + " - add to cart";
+  toast.style.display = "block";
+  timerId = setTimeout(function () {
+    toast.style.display = "none";
   }, duration);
 };
 

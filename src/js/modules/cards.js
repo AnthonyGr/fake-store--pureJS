@@ -28,7 +28,7 @@ const cards = (items, parent) => {
     </footer>
     `;
     elem.querySelector(".btn-buy").addEventListener("click", () => {
-      showToast(title, 3000);
+      showToast(title);
       addToCart(i, title, price);
     });
     document.querySelector(".cards-list").appendChild(elem);
