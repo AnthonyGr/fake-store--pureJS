@@ -3,7 +3,8 @@ let quantity = 0,
   cartModal = document.querySelector("#modal"),
   cartModalOverlay = document.querySelector("#modal-overlay"),
   cart = document.querySelector(".cart"),
-  cartCloseBtn = document.querySelector("#close-button");
+  cartCloseBtn = document.querySelector("#close-button"),
+  cartTotalCost = document.querySelector(".shopping-list__total");
 
 cart.addEventListener("click", () => {
   toggleCart();
@@ -30,6 +31,7 @@ const toggleCart = () => {
 
 const updateCart = () => {
   //CLEAR CART
+  let totalCost = 0;
   const row = document.querySelector(".shopping-list__row");
   row.innerHTML = "";
   //FILL CART
@@ -54,7 +56,10 @@ const updateCart = () => {
       decItemCount(key);
     });
     row.appendChild(elem);
+    totalCost += value.price * value.quantity;
   }
+
+  cartTotalCost.textContent = `Total cost: ${totalCost}$`;
 };
 
 //ADD ITEM TO CART

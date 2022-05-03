@@ -3448,6 +3448,48 @@ module.exports = function (it) {
 
 /***/ }),
 
+/***/ "./node_modules/core-js/internals/schedulers-fix.js":
+/*!**********************************************************!*\
+  !*** ./node_modules/core-js/internals/schedulers-fix.js ***!
+  \**********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var global = __webpack_require__(/*! ../internals/global */ "./node_modules/core-js/internals/global.js");
+var apply = __webpack_require__(/*! ../internals/function-apply */ "./node_modules/core-js/internals/function-apply.js");
+var isCallable = __webpack_require__(/*! ../internals/is-callable */ "./node_modules/core-js/internals/is-callable.js");
+var userAgent = __webpack_require__(/*! ../internals/engine-user-agent */ "./node_modules/core-js/internals/engine-user-agent.js");
+var arraySlice = __webpack_require__(/*! ../internals/array-slice */ "./node_modules/core-js/internals/array-slice.js");
+var validateArgumentsLength = __webpack_require__(/*! ../internals/validate-arguments-length */ "./node_modules/core-js/internals/validate-arguments-length.js");
+
+var MSIE = /MSIE .\./.test(userAgent); // <- dirty ie9- check
+var Function = global.Function;
+
+var wrap = function (scheduler) {
+  return MSIE ? function (handler, timeout /* , ...arguments */) {
+    var boundArgs = validateArgumentsLength(arguments.length, 1) > 2;
+    var fn = isCallable(handler) ? handler : Function(handler);
+    var args = boundArgs ? arraySlice(arguments, 2) : undefined;
+    return scheduler(boundArgs ? function () {
+      apply(fn, this, args);
+    } : fn, timeout);
+  } : scheduler;
+};
+
+// ie9- setTimeout & setInterval additional parameters fix
+// https://html.spec.whatwg.org/multipage/timers-and-user-prompts.html#timers
+module.exports = {
+  // `setTimeout` method
+  // https://html.spec.whatwg.org/multipage/timers-and-user-prompts.html#dom-settimeout
+  setTimeout: wrap(global.setTimeout),
+  // `setInterval` method
+  // https://html.spec.whatwg.org/multipage/timers-and-user-prompts.html#dom-setinterval
+  setInterval: wrap(global.setInterval)
+};
+
+
+/***/ }),
+
 /***/ "./node_modules/core-js/internals/set-global.js":
 /*!******************************************************!*\
   !*** ./node_modules/core-js/internals/set-global.js ***!
@@ -5708,6 +5750,60 @@ handlePrototype(DOMTokenListPrototype, 'DOMTokenList');
 
 /***/ }),
 
+/***/ "./node_modules/core-js/modules/web.set-interval.js":
+/*!**********************************************************!*\
+  !*** ./node_modules/core-js/modules/web.set-interval.js ***!
+  \**********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var $ = __webpack_require__(/*! ../internals/export */ "./node_modules/core-js/internals/export.js");
+var global = __webpack_require__(/*! ../internals/global */ "./node_modules/core-js/internals/global.js");
+var setInterval = __webpack_require__(/*! ../internals/schedulers-fix */ "./node_modules/core-js/internals/schedulers-fix.js").setInterval;
+
+// ie9- setInterval additional parameters fix
+// https://html.spec.whatwg.org/multipage/timers-and-user-prompts.html#dom-setinterval
+$({ global: true, bind: true, forced: global.setInterval !== setInterval }, {
+  setInterval: setInterval
+});
+
+
+/***/ }),
+
+/***/ "./node_modules/core-js/modules/web.set-timeout.js":
+/*!*********************************************************!*\
+  !*** ./node_modules/core-js/modules/web.set-timeout.js ***!
+  \*********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var $ = __webpack_require__(/*! ../internals/export */ "./node_modules/core-js/internals/export.js");
+var global = __webpack_require__(/*! ../internals/global */ "./node_modules/core-js/internals/global.js");
+var setTimeout = __webpack_require__(/*! ../internals/schedulers-fix */ "./node_modules/core-js/internals/schedulers-fix.js").setTimeout;
+
+// ie9- setTimeout additional parameters fix
+// https://html.spec.whatwg.org/multipage/timers-and-user-prompts.html#dom-settimeout
+$({ global: true, bind: true, forced: global.setTimeout !== setTimeout }, {
+  setTimeout: setTimeout
+});
+
+
+/***/ }),
+
+/***/ "./node_modules/core-js/modules/web.timers.js":
+/*!****************************************************!*\
+  !*** ./node_modules/core-js/modules/web.timers.js ***!
+  \****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+// TODO: Remove this module from `core-js@4` since it's split to modules listed below
+__webpack_require__(/*! ../modules/web.set-interval */ "./node_modules/core-js/modules/web.set-interval.js");
+__webpack_require__(/*! ../modules/web.set-timeout */ "./node_modules/core-js/modules/web.set-timeout.js");
+
+
+/***/ }),
+
 /***/ "./node_modules/regenerator-runtime/runtime.js":
 /*!*****************************************************!*\
   !*** ./node_modules/regenerator-runtime/runtime.js ***!
@@ -6570,6 +6666,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_es_array_concat_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! core-js/modules/es.array.concat.js */ "./node_modules/core-js/modules/es.array.concat.js");
 /* harmony import */ var core_js_modules_es_array_concat_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_concat_js__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _shoppingCart__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./shoppingCart */ "./src/js/modules/shoppingCart.js");
+/* harmony import */ var _toast__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./toast */ "./src/js/modules/toast.js");
+
 
 
 
@@ -6589,6 +6687,7 @@ var cards = function cards(items, parent) {
     elem.setAttribute("data-index", i);
     elem.innerHTML = "\n    <div class=\"card__header\">\n      <figure class=\"card__figure\">\n        <img\n          src=".concat(image, "\n          alt=\"\"\n          class=\"card__image\"\n        />\n      </figure>\n    </div>\n    <div class=\"card__body\">\n      <h2 class=\"card__title\">").concat(title, "</h2>\n      <h3 class=\"card__subtitle\">Card Subtitle</h3>\n      <p class=\"card__copy\">").concat(description, "</p>\n    </div>\n    <footer class=\"card__footer\">\n      <div class=\"card__actions\">\n        <button class=\"btn-buy\">").concat(price, " $</button>\n      </div>\n    </footer>\n    ");
     elem.querySelector(".btn-buy").addEventListener("click", function () {
+      Object(_toast__WEBPACK_IMPORTED_MODULE_7__["default"])(title, 3000);
       Object(_shoppingCart__WEBPACK_IMPORTED_MODULE_6__["addToCart"])(i, title, price);
     });
     document.querySelector(".cards-list").appendChild(elem);
@@ -6668,7 +6767,8 @@ var quantity = 0,
     cartModal = document.querySelector("#modal"),
     cartModalOverlay = document.querySelector("#modal-overlay"),
     cart = document.querySelector(".cart"),
-    cartCloseBtn = document.querySelector("#close-button");
+    cartCloseBtn = document.querySelector("#close-button"),
+    cartTotalCost = document.querySelector(".shopping-list__total");
 cart.addEventListener("click", function () {
   toggleCart();
 });
@@ -6691,6 +6791,7 @@ var toggleCart = function toggleCart() {
 
 var updateCart = function updateCart() {
   //CLEAR CART
+  var totalCost = 0;
   var row = document.querySelector(".shopping-list__row");
   row.innerHTML = ""; //FILL CART
 
@@ -6709,11 +6810,14 @@ var updateCart = function updateCart() {
       decItemCount(key);
     });
     row.appendChild(elem);
+    totalCost += value.price * value.quantity;
   };
 
   for (var _i = 0, _Object$entries = Object.entries(CART); _i < _Object$entries.length; _i++) {
     _loop();
   }
+
+  cartTotalCost.textContent = "Total cost: ".concat(totalCost, "$");
 }; //ADD ITEM TO CART
 
 
@@ -6781,6 +6885,35 @@ var spinner = function spinner(selector) {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (spinner);
+
+/***/ }),
+
+/***/ "./src/js/modules/toast.js":
+/*!*********************************!*\
+  !*** ./src/js/modules/toast.js ***!
+  \*********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var core_js_modules_web_timers_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/web.timers.js */ "./node_modules/core-js/modules/web.timers.js");
+/* harmony import */ var core_js_modules_web_timers_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_timers_js__WEBPACK_IMPORTED_MODULE_0__);
+
+
+var showToast = function showToast() {
+  var text = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "Add to cart";
+  var duration = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 2000;
+  var toast = document.querySelector("#toast"); //TODO: Обработка быстрых нажатий на разные товары
+
+  toast.textContent = text;
+  toast.classList.add("show");
+  setTimeout(function () {
+    toast.classList.remove("show");
+  }, duration);
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (showToast);
 
 /***/ })
 

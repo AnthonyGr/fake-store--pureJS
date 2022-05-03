@@ -1,4 +1,5 @@
 import { addToCart } from "./shoppingCart";
+import showToast from "./toast";
 
 const cards = (items, parent) => {
   items.forEach(({ image, title, description, price }, i) => {
@@ -27,6 +28,7 @@ const cards = (items, parent) => {
     </footer>
     `;
     elem.querySelector(".btn-buy").addEventListener("click", () => {
+      showToast(title, 3000);
       addToCart(i, title, price);
     });
     document.querySelector(".cards-list").appendChild(elem);
