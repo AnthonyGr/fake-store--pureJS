@@ -5,8 +5,11 @@ let quantity = 0,
   cart = document.querySelector(".cart"),
   cartCloseBtn = document.querySelector("#close-button"),
   cartTotalCost = document.querySelector(".shopping-list__total"),
-  cartQuantity = document.querySelector(".cart-quantity");
+  cartQuantity = document.querySelector(".cart-quantity"),
+  cartClearBtn = document.querySelector(".shopping-list__clear"),
+  cartCheckoutBtn = document.querySelector(".shopping-list__buy");
 
+//EVENT LISTENERS
 cart.addEventListener("click", () => {
   toggleCart();
 });
@@ -15,6 +18,15 @@ cartCloseBtn.addEventListener("click", () => {
   toggleCart();
 });
 
+cartClearBtn.addEventListener("click", () => {
+  clearCart();
+});
+
+cartCheckoutBtn.addEventListener("click", () => {
+  checkoutOrder();
+});
+
+//FUCNTIONS
 const toggleCart = () => {
   cartModal.classList.toggle("closed");
   cartModalOverlay.classList.toggle("closed");
@@ -25,7 +37,7 @@ const toggleCart = () => {
   }
 };
 
-const showGoodsQuantity = () => {
+const updateGoodsQuantity = () => {
   const quantity = Object.keys(CART).length;
   console.log(quantity);
   if (quantity === 0) {
@@ -45,14 +57,17 @@ const updateCart = () => {
     const elem = document.createElement("div");
     elem.classList.add("shopping-list__item");
     elem.innerHTML = `
-    <div class="shopping-list__name">${value.name}</div>
-    <div class="shopping-list__price">${value.price}</div>
+    <div class="shopping-list__name"><span>${value.name}</span></div>
+    <div class="shopping-list__price"><span>${value.price}</div>
     <div class="shopping-list__quantity">
+    <span>
       <div class="plus">&#10009;</div>
       ${value.quantity}
       <div class="minus">&#9866;</div>
+    </span>
     </div>
-    <div class="shopping-list__cost">${value.price * value.quantity}</div>
+    <div class="shopping-list__cost"><span>
+    ${(value.price * value.quantity).toFixed(2)}</span></div>
     `;
 
     elem.querySelector(".plus").addEventListener("click", () => {
@@ -65,7 +80,7 @@ const updateCart = () => {
     totalCost += value.price * value.quantity;
   }
 
-  cartTotalCost.textContent = `Total cost: ${totalCost}$`;
+  cartTotalCost.textContent = `Total cost: ${totalCost.toFixed(2)}$`;
 };
 
 //ADD ITEM TO CART
@@ -76,13 +91,13 @@ const addToCart = (id, title, price) => {
     CART[id] = { name: title, price: price, quantity: 1 };
   }
 
-  showGoodsQuantity();
+  updateGoodsQuantity();
 };
 
 //REMOVE ITEM FROM CART
 const removeFromCart = (id) => {
   delete CART[id];
-  showGoodsQuantity();
+  updateGoodsQuantity();
 };
 
 //INC ITEM QUANTITY IN CART
@@ -102,6 +117,20 @@ const decItemCount = (id) => {
   if (!cartModal.classList.contains("closed")) {
     updateCart();
   }
+};
+
+//CLEAR CART
+const clearCart = () => {
+  Object.keys(CART).forEach((key) => delete CART[key]);
+  updateCart();
+  updateGoodsQuantity();
+};
+
+//SUBMIT ORDER
+const checkoutOrder = () => {
+  alert("Thanks for your order!");
+  clearCart();
+  toggleCart();
 };
 
 export { addToCart };

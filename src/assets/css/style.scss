@@ -213,6 +213,7 @@
 .shopping-list {
   // .shopping-list__header
   &__header {
+    margin-bottom: 30px;
   }
   // .shopping-list__row
   &__row {
@@ -222,30 +223,78 @@
     display: flex;
     width: 100%;
     justify-content: space-between;
+    align-items: center;
+    align-self: stretch;
+    margin-bottom: 20px;
   }
   // .shopping-list__name
   &__name {
-    flex: 0 0 50%;
-    border: 1px solid lightgray;
+    flex: 0 1 45%;
+    border-bottom: 1px solid lightgray;
+    align-self: stretch;
+    display: flex;
+    align-items: center;
+    padding: 0 5px;
   }
   // .shopping-list__price
   &__price {
-    flex: 0 0 15%;
-    border: 1px solid lightgray;
+    flex: 0 1 15%;
+    border-bottom: 1px solid lightgray;
     text-align: center;
-    line-height: 100%;
+    align-self: stretch;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 5px;
   }
   // .shopping-list__quantity
   &__quantity {
-    flex: 0 0 20%;
-    border: 1px solid lightgray;
+    flex: 0 1 25%;
+    border-bottom: 1px solid lightgray;
     text-align: center;
+    align-self: stretch;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 5px;
   }
   &__cost {
-    flex: 0 0 15%;
-    border: 1px solid lightgray;
+    flex: 0 1 15%;
+    border-bottom: 1px solid lightgray;
     text-align: center;
+    align-self: stretch;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 5px;
   }
+  &__footer {
+    display: flex;
+  }
+
+  &__total {
+    flex: 0 0 40%;
+    font-weight: 700;
+    font-size: 16px;
+  }
+  &__buy {
+    margin-left: 20px;
+    flex: 1 1 30%;
+    background-color: green;
+  }
+  &__clear {
+    margin-left: 20px;
+    flex: 1 1 30%;
+    background-color: gray;
+  }
+}
+
+.btn {
+  border: none;
+  border-radius: 4px;
+  color: #fff;
+  font-size: 16px;
+  padding: 5px;
 }
 
 //INC AND DEC BTNS
