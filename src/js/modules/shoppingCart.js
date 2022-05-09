@@ -83,7 +83,6 @@ const updateCart = () => {
   cartTotalCost.textContent = `Total cost: ${totalCost.toFixed(2)}$`;
 };
 
-//ADD ITEM TO CART
 const addToCart = (id, title, price) => {
   if (CART[id]) {
     CART[id].quantity++;
@@ -94,13 +93,11 @@ const addToCart = (id, title, price) => {
   updateGoodsQuantity();
 };
 
-//REMOVE ITEM FROM CART
 const removeFromCart = (id) => {
   delete CART[id];
   updateGoodsQuantity();
 };
 
-//INC ITEM QUANTITY IN CART
 const incItemCount = (id) => {
   CART[id].quantity++;
   if (!cartModal.classList.contains("closed")) {
@@ -108,7 +105,6 @@ const incItemCount = (id) => {
   }
 };
 
-//DEC ITEM QUANTITY IN CART
 const decItemCount = (id) => {
   CART[id].quantity--;
   if (CART[id].quantity === 0) {
@@ -119,14 +115,12 @@ const decItemCount = (id) => {
   }
 };
 
-//CLEAR CART
 const clearCart = () => {
   Object.keys(CART).forEach((key) => delete CART[key]);
   updateCart();
   updateGoodsQuantity();
 };
 
-//SUBMIT ORDER
 const checkoutOrder = () => {
   alert("Thanks for your order!");
   clearCart();

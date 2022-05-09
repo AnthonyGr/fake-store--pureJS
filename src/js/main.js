@@ -1,12 +1,13 @@
 import cards from "./modules/cards";
 import spinner from "./modules/spinner";
+import autoScroll from "./modules/autoScroll";
 
 window.addEventListener("DOMContentLoaded", () => {
+  const url = "https://fakestoreapi.com/products";
   let goodsList = {};
 
-  //GET ALL GOODS FROM SERVER
   const getAllGoods = async () => {
-    const response = await fetch("https://fakestoreapi.com/products");
+    const response = await fetch(url);
     goodsList = await response.json();
 
     //Выклчаем спинер
@@ -16,6 +17,7 @@ window.addEventListener("DOMContentLoaded", () => {
     cards(goodsList);
   };
 
-  //FLOW
+  //INIT
   getAllGoods();
+  autoScroll();
 });

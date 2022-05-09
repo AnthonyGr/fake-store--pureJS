@@ -11,14 +11,13 @@ const cards = (items, parent) => {
       <figure class="card__figure">
         <img
           src=${image}
-          alt=""
+          alt="${title}"
           class="card__image"
         />
       </figure>
     </div>
     <div class="card__body">
       <h2 class="card__title">${title}</h2>
-      <h3 class="card__subtitle">Card Subtitle</h3>
       <p class="card__copy">${description}</p>
     </div>
     <footer class="card__footer">

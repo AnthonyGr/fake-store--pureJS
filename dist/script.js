@@ -6805,6 +6805,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_es_promise_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_promise_js__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _modules_cards__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/cards */ "./src/js/modules/cards.js");
 /* harmony import */ var _modules_spinner__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/spinner */ "./src/js/modules/spinner.js");
+/* harmony import */ var _modules_autoScroll__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/autoScroll */ "./src/js/modules/autoScroll.js");
 
 
 
@@ -6815,8 +6816,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
 
+
 window.addEventListener("DOMContentLoaded", function () {
-  var goodsList = {}; //GET ALL GOODS FROM SERVER
+  var url = "https://fakestoreapi.com/products";
+  var goodsList = {};
 
   var getAllGoods = /*#__PURE__*/function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
@@ -6826,7 +6829,7 @@ window.addEventListener("DOMContentLoaded", function () {
           switch (_context.prev = _context.next) {
             case 0:
               _context.next = 2;
-              return fetch("https://fakestoreapi.com/products");
+              return fetch(url);
 
             case 2:
               response = _context.sent;
@@ -6851,11 +6854,49 @@ window.addEventListener("DOMContentLoaded", function () {
     return function getAllGoods() {
       return _ref.apply(this, arguments);
     };
-  }(); //FLOW
+  }(); //INIT
 
 
   getAllGoods();
+  Object(_modules_autoScroll__WEBPACK_IMPORTED_MODULE_5__["default"])();
 });
+
+/***/ }),
+
+/***/ "./src/js/modules/autoScroll.js":
+/*!**************************************!*\
+  !*** ./src/js/modules/autoScroll.js ***!
+  \**************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var core_js_modules_web_timers_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/web.timers.js */ "./node_modules/core-js/modules/web.timers.js");
+/* harmony import */ var core_js_modules_web_timers_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_timers_js__WEBPACK_IMPORTED_MODULE_0__);
+
+
+var autoScroll = function autoScroll() {
+  function runScroll() {
+    scrollTo(document.documentElement, 0, 600);
+  }
+
+  var scrollme = document.querySelector(".arrow-icon");
+  scrollme.addEventListener("click", runScroll, false);
+
+  function scrollTo(element, to, duration) {
+    if (duration <= 0) return;
+    var difference = to - element.scrollTop;
+    var perTick = difference / duration * 10;
+    setTimeout(function () {
+      element.scrollTop = element.scrollTop + perTick;
+      if (element.scrollTop == to) return;
+      scrollTo(element, to, duration - 10);
+    }, 10);
+  }
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (autoScroll);
 
 /***/ }),
 
@@ -6900,7 +6941,7 @@ var cards = function cards(items, parent) {
     var elem = document.createElement("article");
     elem.classList.add("card");
     elem.setAttribute("data-index", i);
-    elem.innerHTML = "\n    <div class=\"card__header\">\n      <figure class=\"card__figure\">\n        <img\n          src=".concat(image, "\n          alt=\"\"\n          class=\"card__image\"\n        />\n      </figure>\n    </div>\n    <div class=\"card__body\">\n      <h2 class=\"card__title\">").concat(title, "</h2>\n      <h3 class=\"card__subtitle\">Card Subtitle</h3>\n      <p class=\"card__copy\">").concat(description, "</p>\n    </div>\n    <footer class=\"card__footer\">\n      <div class=\"card__actions\">\n        <button class=\"btn-buy\">").concat(price, " $</button>\n      </div>\n    </footer>\n    ");
+    elem.innerHTML = "\n    <div class=\"card__header\">\n      <figure class=\"card__figure\">\n        <img\n          src=".concat(image, "\n          alt=\"").concat(title, "\"\n          class=\"card__image\"\n        />\n      </figure>\n    </div>\n    <div class=\"card__body\">\n      <h2 class=\"card__title\">").concat(title, "</h2>\n      <p class=\"card__copy\">").concat(description, "</p>\n    </div>\n    <footer class=\"card__footer\">\n      <div class=\"card__actions\">\n        <button class=\"btn-buy\">").concat(price, " $</button>\n      </div>\n    </footer>\n    ");
     elem.querySelector(".btn-buy").addEventListener("click", function () {
       Object(_toast__WEBPACK_IMPORTED_MODULE_7__["default"])(title);
       Object(_shoppingCart__WEBPACK_IMPORTED_MODULE_6__["addToCart"])(i, title, price);
@@ -7062,8 +7103,7 @@ var updateCart = function updateCart() {
   }
 
   cartTotalCost.textContent = "Total cost: ".concat(totalCost.toFixed(2), "$");
-}; //ADD ITEM TO CART
-
+};
 
 var addToCart = function addToCart(id, title, price) {
   if (CART[id]) {
@@ -7077,14 +7117,12 @@ var addToCart = function addToCart(id, title, price) {
   }
 
   updateGoodsQuantity();
-}; //REMOVE ITEM FROM CART
-
+};
 
 var removeFromCart = function removeFromCart(id) {
   delete CART[id];
   updateGoodsQuantity();
-}; //INC ITEM QUANTITY IN CART
-
+};
 
 var incItemCount = function incItemCount(id) {
   CART[id].quantity++;
@@ -7092,8 +7130,7 @@ var incItemCount = function incItemCount(id) {
   if (!cartModal.classList.contains("closed")) {
     updateCart();
   }
-}; //DEC ITEM QUANTITY IN CART
-
+};
 
 var decItemCount = function decItemCount(id) {
   CART[id].quantity--;
@@ -7105,8 +7142,7 @@ var decItemCount = function decItemCount(id) {
   if (!cartModal.classList.contains("closed")) {
     updateCart();
   }
-}; //CLEAR CART
-
+};
 
 var clearCart = function clearCart() {
   Object.keys(CART).forEach(function (key) {
@@ -7114,8 +7150,7 @@ var clearCart = function clearCart() {
   });
   updateCart();
   updateGoodsQuantity();
-}; //SUBMIT ORDER
-
+};
 
 var checkoutOrder = function checkoutOrder() {
   alert("Thanks for your order!");

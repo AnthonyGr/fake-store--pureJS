@@ -1,5 +1,4 @@
 const toast = document.querySelector("#toast");
-
 let timerId;
 
 const showToast = (text = "", duration = 2000) => {
