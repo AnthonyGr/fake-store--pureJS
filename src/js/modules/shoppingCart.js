@@ -39,7 +39,6 @@ const toggleCart = () => {
 
 const updateGoodsQuantity = () => {
   const quantity = Object.keys(CART).length;
-  console.log(quantity);
   if (quantity === 0) {
     cartQuantity.textContent = "";
   } else {
