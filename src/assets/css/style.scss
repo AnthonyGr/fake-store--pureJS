@@ -1,3 +1,15 @@
+html,
+body {
+  height: 100%;
+}
+
+.wrapper {
+  min-height: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
 .container {
   max-width: 1000px;
   margin: 0 auto;
@@ -14,8 +26,10 @@
 
 .main {
   padding: 0 20px;
+  flex: 1 1 auto;
 }
 
+//===CARDS==============================================================
 .cards-list {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -54,6 +68,7 @@
   }
   // .card__copy
   &__copy {
+    word-wrap: break-word;
   }
   // .card__footer
   &__footer {
@@ -62,10 +77,8 @@
   &__actions {
   }
 }
-.button {
-}
 
-// PRELOADER
+//===PRELOADER==============================================================
 .preloader {
   position: fixed;
   left: 0;
@@ -98,7 +111,7 @@
   display: none;
 }
 
-// CART
+//===CART ICON==============================================================
 .cart {
   position: fixed;
   bottom: 1.5rem;
@@ -134,22 +147,15 @@
   }
 }
 
-//MODAL
+//===MODAL==============================================================
 .modal {
-  /* This way it could be display flex or grid or whatever also. */
   display: block;
-
-  /* Probably need media queries here */
   width: 600px;
   max-width: 100%;
-
   height: 400px;
   max-height: 100%;
-
   position: fixed;
-
   z-index: 100;
-
   left: 50%;
   top: 50%;
 
@@ -173,7 +179,6 @@
   width: 100%;
   height: 100%;
   z-index: 50;
-
   background: rgba(0, 0, 0, 0.6);
 }
 .modal-content {
@@ -215,7 +220,7 @@
   border-radius: 4px;
 }
 
-//TODO: Стилизовать список товаров
+//===SHOPPING LIST IN CART==============================================================
 .shopping-list {
   // .shopping-list__header
   &__header {
@@ -295,6 +300,7 @@
   }
 }
 
+//===BUTTONS==============================================================
 .btn {
   border: none;
   border-radius: 4px;
@@ -303,15 +309,20 @@
   padding: 5px;
 }
 
-//INC AND DEC BTNS
 .plus,
 .minus {
   display: inline-block;
   cursor: pointer;
 }
 
-//TOAST NOTOFOCATION
-/* The toast - position it at the bottom and in the middle of the screen */
+@media (max-width: 425px) {
+  .plus,
+  .minus {
+    display: block;
+  }
+}
+
+//===TOAST==============================================================
 #toast {
   display: none; /* Hidden by default. Visible on click */
   min-width: 250px; /* Set a default minimum width */

@@ -16,63 +16,65 @@
     <title>Fake Store PureJS</title>
   </head>
   <body>
-    <header class="header">
-      <div class="container">
-        <div class="header__logo">Fake Store</div>
-      </div>
-    </header>
-    <main class="main">
-      <div class="cart">
-        <div class="cart-image">
-          <img src="assets/online-shopping.png" alt="" />
+    <div class="wrapper">
+      <header class="header">
+        <div class="container">
+          <div class="header__logo">Fake Store</div>
         </div>
-        <div class="cart-quantity"></div>
-      </div>
-      <div class="container">
-        <div class="preloader">
-          <svg
-            class="preloader__image"
-            role="img"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 512 512"
-          >
-            <path
-              fill="currentColor"
-              d="M304 48c0 26.51-21.49 48-48 48s-48-21.49-48-48 21.49-48 48-48 48 21.49 48 48zm-48 368c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48-21.49-48-48-48zm208-208c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48-21.49-48-48-48zM96 256c0-26.51-21.49-48-48-48S0 229.49 0 256s21.49 48 48 48 48-21.49 48-48zm12.922 99.078c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48c0-26.509-21.491-48-48-48zm294.156 0c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48c0-26.509-21.49-48-48-48zM108.922 60.922c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48-21.491-48-48-48z"
-            ></path>
-          </svg>
+      </header>
+      <main class="main">
+        <div class="cart">
+          <div class="cart-image">
+            <img src="assets/online-shopping.png" alt="" />
+          </div>
+          <div class="cart-quantity"></div>
         </div>
-        <section class="cards-list"></section>
-      </div>
-    </main>
-    <footer class="footer">
-      <div class="container">
-        <div class="footer__list">
-          <div class="footer__item">
-            Test project by
-            <a
-              class="link"
-              target="_blank"
-              rel="noopener noreferrer"
-              href="https://github.com/AnthonyGr"
-              >@tonygrishin</a
+        <div class="container">
+          <div class="preloader">
+            <svg
+              class="preloader__image"
+              role="img"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 512 512"
             >
+              <path
+                fill="currentColor"
+                d="M304 48c0 26.51-21.49 48-48 48s-48-21.49-48-48 21.49-48 48-48 48 21.49 48 48zm-48 368c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48-21.49-48-48-48zm208-208c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48-21.49-48-48-48zM96 256c0-26.51-21.49-48-48-48S0 229.49 0 256s21.49 48 48 48 48-21.49 48-48zm12.922 99.078c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48c0-26.509-21.491-48-48-48zm294.156 0c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48c0-26.509-21.49-48-48-48zM108.922 60.922c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48-21.491-48-48-48z"
+              ></path>
+            </svg>
           </div>
-          <div class="footer__item">
-            <a
-              class="link"
-              target="_blank"
-              rel="noopener noreferrer"
-              href="https://github.com/AnthonyGr/fake-store--pureJS"
-              >Repo</a
-            >
-          </div>
-          <div class="footer__item">
-            <img class="arrow-icon" src="./assets/images/arrow.png" />
+          <section class="cards-list"></section>
+        </div>
+      </main>
+      <footer class="footer">
+        <div class="container">
+          <div class="footer__list">
+            <div class="footer__item">
+              Test project by
+              <a
+                class="link"
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://github.com/AnthonyGr"
+                >@tonygrishin</a
+              >
+            </div>
+            <div class="footer__item">
+              <a
+                class="link"
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://github.com/AnthonyGr/fake-store--pureJS"
+                >Repo</a
+              >
+            </div>
+            <div class="footer__item">
+              <img class="arrow-icon" src="./assets/images/arrow.png" />
+            </div>
           </div>
         </div>
-      </div>
-    </footer>
+      </footer>
+    </div>
 
     <!--MODAL SHOPING-CART-->
     <div class="modal-overlay closed" id="modal-overlay"></div>
